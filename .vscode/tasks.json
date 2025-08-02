@@ -1,0 +1,26 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+        {
+        "label": "Main",
+        "type": "shell",
+        "command": "g++",
+        "args": [
+            "-g",
+            "${workspaceFolder}/DynamicArray/Src/main.cpp",
+            "${workspaceFolder}/DynamicArray/Classes/ClassImplementations/*.cpp",
+            "-I${workspaceFolder}/DynamicArray/Headers",
+            "-I${workspaceFolder}/DynamicArray/Classes/ClassHeaders",
+            "-o",
+            "${workspaceFolder}/DynamicArray/Build/DynamicArray.exe"
+        ],
+        "group": {
+            "kind": "build",
+            "isDefault": true
+        },
+        "problemMatcher": [
+            "$gcc"
+        ]
+        }
+    ]
+}
