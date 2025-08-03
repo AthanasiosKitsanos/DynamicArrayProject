@@ -11,6 +11,7 @@
             "${workspaceFolder}/DynamicArray/Classes/ClassImplementations/*.cpp",
             "-I${workspaceFolder}/DynamicArray/Headers",
             "-I${workspaceFolder}/DynamicArray/Classes/ClassHeaders",
+            "-I${workspaceFolder}/DynamicArray/Templates",
             "-o",
             "${workspaceFolder}/DynamicArray/Build/DynamicArray.exe"
         ],
