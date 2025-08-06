@@ -3,7 +3,10 @@
     {
       "name": "Win32",
       "includePath": [
-        "${workspaceFolder}/**"
+        "${workspaceFolder}/**",
+        "${workspaceFolder}/DynamicArray/Headers",
+        "${workspaceFolder}/DynamicArray/Classes/ClassHeaders",
+        "${workspaceFolder}/DynamicArray/Templates"
       ],
       "defines": [],
       "compilerPath": "C:/msys64/ucrt64/bin/g++.exe",

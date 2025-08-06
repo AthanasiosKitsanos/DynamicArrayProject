@@ -40,9 +40,10 @@ void DynamicArray<T>::push_back(T element)
     {
         size_t newCapacity = capacity >  0 ? capacity * 2 : 4;
 
-        T* newData = static_cast<T*>(_aligned_malloc(alignof(T), newCapacity * sizeof(T)));
+        void* rawMemory = _aligned_malloc(newCapacity * sizeof(T), alignof(T));
+        T* newData = static_cast<T*>(rawMemory);
 
-        if(!newData)
+        if(!rawMemory)
         {
             std::cout << "Reallocation failed" << std::endl;
             return;
@@ -54,12 +55,12 @@ void DynamicArray<T>::push_back(T element)
             _aligned_free(data);
         }
 
-        data = static_cast<T*>(newData);
+        data = newData;
         capacity = newCapacity;
         newData = nullptr;
     }
 
-    *(data + size) = element;
+    new(data + size) T(element);
 
     size++;
 }
