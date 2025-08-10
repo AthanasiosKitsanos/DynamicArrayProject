@@ -14,8 +14,11 @@ class DynamicArray
         ~DynamicArray();
         
         int Count();
+        int items_capacity();
         int Capacity();
-        T Data(int& index);
+        int find_index(const T& value);
+
+        T index(const T& index);
         
         void push_back(const T& value);
         void pop_back();
