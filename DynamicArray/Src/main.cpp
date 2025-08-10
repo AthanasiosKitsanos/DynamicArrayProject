@@ -15,13 +15,21 @@ int main()
     intList->push_back(3);
     intList->push_back(4);
     std::cout << "Items: " << intList->Count() << std::endl;
+    std::cout << "Items Capacity: " << intList->items_capacity() << std::endl;
     std::cout << "Blocks Occupied: " << intList->Capacity() << std::endl;
     std::cout << *intList << std::endl;
     std::cin.get();
+
+    int value = 3;
+    int index = intList->find_index(value);
+
+    std::cout << "Index of " << value << ": " << index << std::endl;
+    std::cout << "Value of index " << index << ": " << intList->index(2) << std::endl;
     
     std::cout << "Pop Back" << std::endl;
     intList->pop_back();
     std::cout << "Items: " << intList->Count() << std::endl;
+    std::cout << "Items Capacity: " << intList->items_capacity() << std::endl;
     std::cout << "Blocks Occupied: " << intList->Capacity() << std::endl;
     std::cout << *intList << std::endl;
     std::cin.get();
@@ -29,6 +37,7 @@ int main()
     std::cout << "Pop Back" << std::endl;
     intList->pop_back();
     std::cout << "Items: " << intList->Count() << std::endl;
+    std::cout << "Items Capacity: " << intList->items_capacity() << std::endl;
     std::cout << "Blocks Occupied: " << intList->Capacity() << std::endl;
     std::cout << *intList << std::endl;
     std::cin.get();
@@ -36,6 +45,7 @@ int main()
     std::cout << "Pop Front" << std::endl;
     intList->pop_front();
     std::cout << "Items: " << intList->Count() << std::endl;
+    std::cout << "Items Capacity: " << intList->items_capacity() << std::endl;
     std::cout << "Blocks Occupied: " << intList->Capacity() << std::endl;
     std::cout << *intList << std::endl;
     std::cin.get();
@@ -43,6 +53,7 @@ int main()
     std::cout << "Pop Front" << std::endl;
     intList->pop_front();
     std::cout << "Items: " << intList->Count() << std::endl;
+    std::cout << "Items Capacity: " << intList->items_capacity() << std::endl;
     std::cout << "Blocks Occupied: " << intList->Capacity() << std::endl;
     std::cout << *intList << std::endl;
     std::cin.get();

@@ -7,7 +7,7 @@ std::ostream& operator<<(std::ostream& os, DynamicArray<T>& arr)
     os << "List: [";
     for(int i = 0; i < arr.Count(); i++)
     {
-        os << arr.Data(i);
+        os << arr.index(i);
 
         if( i < arr.Count() - 1)
         {
@@ -20,8 +20,10 @@ std::ostream& operator<<(std::ostream& os, DynamicArray<T>& arr)
     return os;
 }
 
+
+
 template<typename T>
-T DynamicArray<T>::Data(int& index)
+T DynamicArray<T>::index(const T& index)
 {
     return *(data + index);
 }
@@ -36,6 +38,12 @@ template<typename T>
 int DynamicArray<T>::Capacity()
 {
     return capacity * sizeof(T);
+}
+
+template<typename T>
+int DynamicArray<T>::items_capacity()
+{
+    return count * sizeof(T);
 }
 
 template<typename T>
@@ -148,4 +156,18 @@ void DynamicArray<T>::pop_front()
     }
 
     count--;
+}
+
+template<typename T>
+int DynamicArray<T>::find_index(const T& value)
+{
+    for(int i = 0; i < count; i++)
+    {
+        if(*(data + i) == value)
+        {
+            return i;
+        }
+    }
+
+    return -1;
 }
