@@ -23,6 +23,7 @@ class DynamicArray
         void push_back(const T& value);
         void pop_back();
         void pop_front();
+        void remove_value(const T& value);
 };
 
 #include "DynamicArray.tpp"
