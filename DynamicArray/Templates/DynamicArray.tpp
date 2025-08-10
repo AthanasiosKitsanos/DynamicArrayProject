@@ -101,6 +101,12 @@ void DynamicArray<T>::push_back(const T& value)
 template<typename T>
 void DynamicArray<T>:: pop_back()
 {   
+    if(count == 0)
+    {
+        std::cout << "The list is empty, there is nothing to remove" << std::endl;
+        return;
+    }
+
     (data + count - 1)->~T();
 
     if(capacity - count == 2)
@@ -130,6 +136,12 @@ void DynamicArray<T>:: pop_back()
 template<typename T>
 void DynamicArray<T>::pop_front()
 {
+    if(count == 0)
+    {
+        std::cout << "The list is empty, there is nothing to remove" << std::endl;
+        return;
+    }
+
     data->~T();
 
     memcpy(data, data + 1, (count - 1) * sizeof(T));
@@ -170,4 +182,53 @@ int DynamicArray<T>::find_index(const T& value)
     }
 
     return -1;
+}
+
+template<typename T>
+void DynamicArray<T>::remove_value(const T& value)
+{
+    if(count == 0)
+    {
+        std::cout << "The list is empty, there is nothing to remove" << std::endl;
+        return;
+    }
+
+    int index = 0;
+    while(*(data + index) != value && index < count)
+    {
+        index++;
+    }
+
+    if(index == count)
+    {
+        std::cout << "Value not found" << std::endl;
+        return;
+    }
+
+    (data + index)->~T();
+
+    memcpy(data + index, data + index + 1, (count - 1) * sizeof(T));
+
+    if(capacity - count == 2)
+    {
+        size_t newCapacity = capacity - 2;
+
+        if(newCapacity == 0)
+        {
+            newCapacity = 2;
+        }
+
+        T* newData = static_cast<T*>(_aligned_realloc(data, newCapacity * sizeof(T), alignof(T)));
+        if(!newData)
+        {
+            std::cout << "Pop Back failed" << std::endl;
+            return;
+        }
+
+        data = newData;
+        capacity = newCapacity;
+        newData = nullptr;
+    }
+
+    count--;
 }
