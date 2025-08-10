@@ -2,20 +2,55 @@
 #include "DynamicArray.h"
 
 template<typename T>
-std::ostream& operator<<(std::ostream& os, const DynamicArray<T>& arr)
+std::ostream& operator<<(std::ostream& os, DynamicArray<T>& arr)
 {
-    for(size_t i = 0; i < arr.size; i++)
+    os << "List: [";
+    for(int i = 0; i < arr.Count(); i++)
     {
-        os << arr.data[i];
+        os << arr.Data(i);
+
+        if( i < arr.Count() - 1)
+        {
+            os << ", ";
+        }
     }
+
+    os << "]";
 
     return os;
 }
 
 template<typename T>
-DynamicArray<T>::DynamicArray():data(nullptr), size(0), capacity(0)
+T DynamicArray<T>::Data(int& index)
 {
-    std:: cout << "Memory allocated" << std::endl; 
+    return *(data + index);
+}
+
+template<typename T>
+int DynamicArray<T>::Count()
+{
+    return count;
+}
+
+template<typename T>
+int DynamicArray<T>::Capacity()
+{
+    return capacity * sizeof(T);
+}
+
+template<typename T>
+DynamicArray<T>::DynamicArray():data(nullptr), count(0), capacity(2)
+{
+    data = static_cast<T*>(_aligned_malloc(capacity * sizeof(T), alignof(T)));
+
+    if(data)
+    {
+        std::cout << "Memory Allocation for data was a success" << std::endl;
+    }
+    else
+    {
+        std::cout << "Memory Allocation failed" << std::endl;
+    }
 }
 
 template<typename T>
@@ -25,34 +60,55 @@ DynamicArray<T>::~DynamicArray()
     {
         _aligned_free(data);
         data = nullptr;
-        std::cout << "Data pointer is null" << std::endl;
     }
-    
-    size = 0;
+
+    count = 0;
     capacity = 0;
-    std::cout << "Dynamic Array Destructor was successful" << std::endl;
+
+    std::cout << "Destructor was successful" << std::endl;
 }
 
 template<typename T>
-void DynamicArray<T>::push_back(T element)
-{
-    if(size >= capacity)
+void DynamicArray<T>::push_back(const T& value)
+{   
+    if(count >= capacity)
     {
-        size_t newCapacity = capacity >  0 ? capacity * 2 : 4;
-
-        void* rawMemory = _aligned_malloc(newCapacity * sizeof(T), alignof(T));
-        T* newData = static_cast<T*>(rawMemory);
-
-        if(!rawMemory)
+        size_t newCapacity = capacity + 2;
+        T* newData = static_cast<T*>(_aligned_realloc(data, newCapacity * sizeof(T), alignof(T)));
+        if(!newData)
         {
             std::cout << "Reallocation failed" << std::endl;
             return;
         }
 
-        if(data)
+        data = newData;
+        capacity = newCapacity;
+    }
+
+    new(data + count) T(value);
+
+    count++;
+}
+
+template<typename T>
+void DynamicArray<T>:: pop_back()
+{   
+    (data + count - 1)->~T();
+
+    if(capacity - count == 2)
+    {
+        size_t newCapacity = capacity - 2;
+
+        if(newCapacity == 0)
         {
-            memcpy(newData, data, size * sizeof(T));
-            _aligned_free(data);
+            newCapacity = 2;
+        }
+
+        T* newData = static_cast<T*>(_aligned_realloc(data, newCapacity * sizeof(T), alignof(T)));
+        if(!newData)
+        {
+            std::cout << "Pop Back failed" << std::endl;
+            return;
         }
 
         data = newData;
@@ -60,20 +116,36 @@ void DynamicArray<T>::push_back(T element)
         newData = nullptr;
     }
 
-    new(data + size) T(element);
-
-    size++;
+    count--;
 }
 
 template<typename T>
-void DynamicArray<T>::pop_back()
+void DynamicArray<T>::pop_front()
 {
-    if(size == 0)
-    {
-        std::cout << "There is nothing to delete";
-        return;
-    }
-    size--;
+    data->~T();
 
-    *(data + size) = ~T();
+    memcpy(data, data + 1, (count - 1) * sizeof(T));
+
+    if(capacity - count == 2)
+    {
+        size_t newCapacity = capacity - 2;
+
+        if(newCapacity == 0)
+        {
+            newCapacity = 2;
+        }
+
+        T* newData = static_cast<T*>(_aligned_realloc(data, newCapacity * sizeof(T), alignof(T)));
+        if(!newData)
+        {
+            std::cout << "Pop Back failed" << std::endl;
+            return;
+        }
+
+        data = newData;
+        capacity = newCapacity;
+        newData = nullptr;
+    }
+
+    count--;
 }

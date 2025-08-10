@@ -58,6 +58,8 @@
         "semaphore": "cpp",
         "stop_token": "cpp",
         "thread": "cpp",
-        "*tpp": "cpp"
+        "*tpp": "cpp",
+        "list": "cpp",
+        "*.tpp": "cpp"
     }
 }

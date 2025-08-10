@@ -3,41 +3,53 @@
 
 int main()
 {
-    void* rawMemory = malloc(sizeof(DynamicArray<int>));
+    void* rawMemory = _aligned_malloc(sizeof(DynamicArray<int>), alignof(DynamicArray<int>));
 
-    DynamicArray<int>* intPtr = new(rawMemory) DynamicArray<int>();
+    DynamicArray<int>* intList = new(rawMemory) DynamicArray<int>();
 
-    intPtr->push_back(4);
-    intPtr->push_back(5);
+    std::cout << "Blocks Occupied: " << intList->Capacity() << std::endl;
+    std::cin.get();
 
-    std::cout << "\nPush_Back:" << std::endl;
+    intList->push_back(1);
+    intList->push_back(2);
+    intList->push_back(3);
+    intList->push_back(4);
+    std::cout << "Items: " << intList->Count() << std::endl;
+    std::cout << "Blocks Occupied: " << intList->Capacity() << std::endl;
+    std::cout << *intList << std::endl;
+    std::cin.get();
+    
+    std::cout << "Pop Back" << std::endl;
+    intList->pop_back();
+    std::cout << "Items: " << intList->Count() << std::endl;
+    std::cout << "Blocks Occupied: " << intList->Capacity() << std::endl;
+    std::cout << *intList << std::endl;
+    std::cin.get();
 
-    for(size_t i = 0; i < intPtr->size ; i++)
-    {
-        std::cout << intPtr->data[i] << std::endl;
-    }
+    std::cout << "Pop Back" << std::endl;
+    intList->pop_back();
+    std::cout << "Items: " << intList->Count() << std::endl;
+    std::cout << "Blocks Occupied: " << intList->Capacity() << std::endl;
+    std::cout << *intList << std::endl;
+    std::cin.get();
 
-    intPtr->pop_back();
+    std::cout << "Pop Front" << std::endl;
+    intList->pop_front();
+    std::cout << "Items: " << intList->Count() << std::endl;
+    std::cout << "Blocks Occupied: " << intList->Capacity() << std::endl;
+    std::cout << *intList << std::endl;
+    std::cin.get();
 
-    std::cout << "\nPop_Back:" << std::endl;
-    for(size_t i = 0; i < intPtr->size ; i++)
-    {
-        std::cout << intPtr->data[i] << std::endl;
-    }
+    std::cout << "Pop Front" << std::endl;
+    intList->pop_front();
+    std::cout << "Items: " << intList->Count() << std::endl;
+    std::cout << "Blocks Occupied: " << intList->Capacity() << std::endl;
+    std::cout << *intList << std::endl;
+    std::cin.get();
 
-    intPtr->push_back(5);
-
-    std::cout << "\nPush_Back:" << std::endl;
-
-    for(size_t i = 0; i < intPtr->size ; i++)
-    {
-        std::cout << intPtr->data[i] << std::endl;
-    }
-
-    intPtr->~DynamicArray();
-    free(rawMemory);
-    intPtr = nullptr;
-    rawMemory = nullptr;
+    intList->~DynamicArray();
+    _aligned_free(intList);
+    intList = nullptr;
 
 
     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
