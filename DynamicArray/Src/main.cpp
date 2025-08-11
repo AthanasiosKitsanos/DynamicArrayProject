@@ -10,15 +10,19 @@ int main()
     std::cout << "Blocks Occupied: " << intList->Capacity() << std::endl;
     std::cin.get();
 
-    intList->push_back(1);
-    intList->push_back(2);
-    intList->push_back(3);
     intList->push_back(4);
+    intList->push_back(3);
+    intList->push_back(2);
+    intList->push_back(1);
     std::cout << "Items: " << intList->Count() << std::endl;
     std::cout << "Items Capacity: " << intList->items_capacity() << std::endl;
     std::cout << "Blocks Occupied: " << intList->Capacity() << std::endl;
     std::cout << *intList << std::endl;
     std::cin.get();
+
+    intList->sort();
+    std::cout << "After sorting" << std::endl;
+    std::cout << *intList << std::endl;
 
     std::cout << "Pop Front value 1:" << std::endl;
     intList->pop_front();
