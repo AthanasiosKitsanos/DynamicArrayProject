@@ -145,6 +145,8 @@ void DynamicArray<T>::pop_front()
     data->~T();
 
     memcpy(data, data + 1, (count - 1) * sizeof(T));
+    
+    (data + count - 1)->~T();
 
     if(capacity - count == 2)
     {
@@ -194,7 +196,7 @@ void DynamicArray<T>::remove_value(const T& value)
     }
 
     int index = 0;
-    while(*(data + index) != value && index < count)
+    while(index < count && *(data + index) != value)
     {
         index++;
     }
@@ -207,7 +209,9 @@ void DynamicArray<T>::remove_value(const T& value)
 
     (data + index)->~T();
 
-    memcpy(data + index, data + index + 1, (count - 1) * sizeof(T));
+    memcpy(data + index, data + index + 1, (count - index - 1) * sizeof(T));
+
+    (data + count - 1)->~T();
 
     if(capacity - count == 2)
     {

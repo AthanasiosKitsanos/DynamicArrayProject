@@ -20,6 +20,14 @@ int main()
     std::cout << *intList << std::endl;
     std::cin.get();
 
+    std::cout << "Pop Front value 1:" << std::endl;
+    intList->pop_front();
+    std::cout << "Items: " << intList->Count() << std::endl;
+    std::cout << "Items Capacity: " << intList->items_capacity() << std::endl;
+    std::cout << "Blocks Occupied: " << intList->Capacity() << std::endl;
+    std::cout << *intList << std::endl;
+    std::cin.get();
+
     std::cout << "Removing value 2" << std::endl;
     intList->remove_value(2);
     std::cout << "Items: " << intList->Count() << std::endl;
@@ -33,7 +41,7 @@ int main()
     value = 4;
     std::cout << "Index of " << value << ": " << intList->find_index(value) << std::endl;
     
-    std::cout << "Pop Back" << std::endl;
+    std::cout << "Pop Back value: 4" << std::endl;
     intList->pop_back();
     std::cout << "Items: " << intList->Count() << std::endl;
     std::cout << "Items Capacity: " << intList->items_capacity() << std::endl;
@@ -41,7 +49,9 @@ int main()
     std::cout << *intList << std::endl;
     std::cin.get();
 
-    std::cout << "Pop Back" << std::endl;
+    
+
+    std::cout << "Pop Back value: 3" << std::endl;
     intList->pop_back();
     std::cout << "Items: " << intList->Count() << std::endl;
     std::cout << "Items Capacity: " << intList->items_capacity() << std::endl;
@@ -49,15 +59,9 @@ int main()
     std::cout << *intList << std::endl;
     std::cin.get();
 
-    std::cout << "Pop Front" << std::endl;
-    intList->pop_front();
-    std::cout << "Items: " << intList->Count() << std::endl;
-    std::cout << "Items Capacity: " << intList->items_capacity() << std::endl;
-    std::cout << "Blocks Occupied: " << intList->Capacity() << std::endl;
-    std::cout << *intList << std::endl;
-    std::cin.get();
+    
 
-    std::cout << "Pop Front" << std::endl;
+    std::cout << "Pop Front (empty list)" << std::endl;
     intList->pop_front();
     std::cout << "Items: " << intList->Count() << std::endl;
     std::cout << "Items Capacity: " << intList->items_capacity() << std::endl;
