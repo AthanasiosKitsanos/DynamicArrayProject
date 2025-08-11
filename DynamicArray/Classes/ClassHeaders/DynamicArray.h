@@ -8,7 +8,6 @@ class DynamicArray
         int count;
         size_t capacity;
         
-
     public:
         DynamicArray();
         ~DynamicArray();
@@ -24,6 +23,7 @@ class DynamicArray
         void pop_back();
         void pop_front();
         void remove_value(const T& value);
+        void sort(std::function<bool(const T&, const T&)> comp = [](const T& a, const T& b) { return a > b; });
 };
 
 #include "DynamicArray.tpp"

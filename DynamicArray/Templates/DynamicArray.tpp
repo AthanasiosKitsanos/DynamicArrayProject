@@ -236,3 +236,21 @@ void DynamicArray<T>::remove_value(const T& value)
 
     count--;
 }
+
+template<typename T>
+void DynamicArray<T>::sort(std::function<bool(const T&, const T&)> comp)
+{
+    T current;
+    for(int i = 0; i < count -1; i++)
+    {
+        for(int j = 0; j < count - 1 - i; j++)
+        {
+            if(comp(data[j], data[j + 1]))
+            {
+                current = data[j];
+                data[j] = data[j + 1];
+                data[j + 1] = current;
+            }
+        }
+    }
+}
