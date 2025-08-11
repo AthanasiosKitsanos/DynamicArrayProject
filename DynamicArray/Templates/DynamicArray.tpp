@@ -20,8 +20,6 @@ std::ostream& operator<<(std::ostream& os, DynamicArray<T>& arr)
     return os;
 }
 
-
-
 template<typename T>
 T DynamicArray<T>::index(const T& index)
 {
