@@ -2,6 +2,12 @@
 #include "DynamicArray.h"
 
 template<typename T>
+T& DynamicArray<T>::operator[](size_t index) const
+{
+    return *(data + index);
+}
+
+template<typename T>
 std::ostream& operator<<(std::ostream& os, DynamicArray<T>& arr)
 {
     os << "List: [";

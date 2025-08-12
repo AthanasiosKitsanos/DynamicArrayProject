@@ -9,6 +9,7 @@ class DynamicArray
         size_t capacity;
         
     public:
+        T& operator[](size_t index) const;
         DynamicArray();
         ~DynamicArray();
         
