@@ -14,7 +14,12 @@ int main()
     intList->push_back(3);
     intList->push_back(2);
     intList->push_back(1);
-    std::cout << "Items: " << intList->Count() << std::endl;
+
+    std::cout << "Checking operator [] intList[0]" << std::endl;
+    std::cout << "Number: "<< (*intList)[0] << std::endl;
+    std::cout << "intList->index(0): " << intList->index(0) << std::endl;
+
+    std::cout << "\nItems: " << intList->Count() << std::endl;
     std::cout << "Items Capacity: " << intList->items_capacity() << std::endl;
     std::cout << "Blocks Occupied: " << intList->Capacity() << std::endl;
     std::cout << *intList << std::endl;
